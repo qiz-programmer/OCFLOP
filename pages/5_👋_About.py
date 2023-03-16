@@ -47,7 +47,7 @@ def about_us():
         col4 = st.columns(1)[0]
         with col4:
             st.markdown(f"<h2 style='text-align: left; font-size: 25px;'>Pembimbing</h2>", unsafe_allow_html=True)
-            image4 = Image.open('image/ahmad.jpeg')
+            image4 = Image.open('image/drAriana.jpg')
             st.image(image4, caption='Dr. Ariana Yunita',width= 230)
 
 if __name__ == '__main__' :

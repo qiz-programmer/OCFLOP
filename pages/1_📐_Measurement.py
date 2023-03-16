@@ -10,7 +10,7 @@ st.set_page_config(
 st.markdown("# Measurement Ocean Flow Power 🌊")
 with st.sidebar:
     header = st.success("Fitur Measurement")
-    info = st.info("Pada Fitur ini silakan masukkan parameter inputan untuk menghitung daya arus laut")
+    info = st.info("Pada Fitur ini silakan masukkan parameter inputan untuk menghitung daya arus laut dan pencarian luas penampang turbin")
 
 # Title
 st.text('By Student of Pertamina University\n')
@@ -26,26 +26,31 @@ if pilih == 'Daya Arus Laut':
 
 elif pilih == 'Luas Penampang Turbin':
     daya = st.number_input("Daya Arus Listrik (Watt) ⚡")
-    v_arus_laut = st.number_input("Kecepatan Arus laut (m/s) 🌊")
+    ocean_flow = st.number_input("Kecepatan Arus laut (m/s) 🌊")
     kerapatan_massa = st.number_input("Kerapatan Massa Air (kg/m^3) 💧", 1000, 1100 )
-    Efisiensi_turbin = st.number_input("Efisiensi(%) ⚙️", 0.0, 100.0)
-    Luas_penampang = 2 * daya /((abs(v_arus_laut)**3) * kerapatan_massa*(Efisiensi_turbin / 100) )
+    Efisiensi_turbin = st.number_input("Efisiensi(%) ⚙️")
     hitung2 = st.button('Hitung')
+    if ocean_flow != 0 and Efisiensi_turbin != 0:
+        Luas_penampang = 2 * daya /((abs(ocean_flow)**3) * kerapatan_massa*(Efisiensi_turbin / 100) )
+
+    else:
+        st.error("Kecepatan Arus laut dan efiensi tidak boleh nol")
 
 if pilih == 'Daya Arus Laut'and hitung1:
     mtr1, mtr2, mtr3 = st.columns(3)
-    mtr1.metric("Daya (watt) ⚡", daya_listrik_arus)   
+    power = round(daya_listrik_arus,3)
+    mtr1.metric("Daya (KW) ⚡", power/1000)   
     mtr2.metric("Efisiensi(%) ⚙️", Efisiensi_turbin )
     mtr3.metric("Kecapatan Arus(m/s) 🌊", v_arus_laut )
-    st.success(f"Potensi daya arus laut yang dihasilkan adalah {daya_listrik_arus} Watt")
+    st.success(f"Potensi daya arus laut yang dihasilkan adalah {power/1000} KW")
 
 elif pilih == 'Luas Penampang Turbin' and hitung2:
-    mtr1, mtr2, mtr3 = st.columns(3)
-    mtr1.metric("Luas Penampang(m^2) 🛑", Luas_penampang)   
-    mtr2.metric("Daya (Watt) ⚡", daya )
-    mtr3.metric("Kecapatan Arus(m/s) 🌊", v_arus_laut )
-    st.success(f"Luas Penampang yang diperlukan adalah {Luas_penampang} m^2")
-    st.exception(0)
+    mtr1, mtr2, mtr3 = st.columns(3)    
+    mtr1.metric("Luas Penampang(m^2) 🛑", round(Luas_penampang*1000,4))   
+    mtr2.metric("Daya (KW) ⚡", daya )
+    mtr3.metric("Kecapatan Arus(m/s) 🌊", ocean_flow )
+    st.success(f"Luas Penampang yang diperlukan adalah {round(Luas_penampang*1000,4)} m^2")
+
 
 
 

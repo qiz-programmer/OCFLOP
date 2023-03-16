@@ -31,12 +31,12 @@ Sedangkan untuk luas penampang turbin memiliki luaran metric, sebagai berikut.
 2. Daya arus laut
 3. kecepatan arus
 ''')
-st.subheader("Fitur Show Data")
+st.subheader("Fitur Data Visualization")
 st.markdown("""
 Fitur Show data merupakan fitur yang menampilkan data kecepatan arus, di mana parameter ini merupakan parameter utama dalam perhitungan daya arus laut.
 fitur ini menyediakan data arus laut secara real time sesuai waktu UTC dengan selisih waktu 3 jam. 
 Data ini ini diambil berdasarkan data BMKG OFS atau Badan Meteorologi Klimatologi dan Geofisika Ocean Forecast System yang khusus menyediakan data kemaritiman di Indonesia.
-""")
+User bisa juga memvisualisasikan data secara manual dengan ketentuan emngisikan tahun, bulan dan file dengan format CSV pada file uploader.""")
 
 
 
